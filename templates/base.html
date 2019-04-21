@@ -2,15 +2,21 @@
 <html>
     <head>
         <title>{{title}}</title>
+        <style>
+            .error{
+                color:red;
+                font-style: oblique;
+            }
+        </style>
     </head>
 
     <body>
         <nav>
-            <header id="header-links">
-                <a href="#main">Main Blog Page </a> &#8214;
-                <a href="#new">Add New Blog Entry </a> &#8214;
-            </header>
+            <a href="/blog">Main Blog Page</a> <b>|</b>
+            <a href="/newpost">Add New Blog Entry </a> <b>|</b>
         </nav>
+
+
         {% block content%}
 
         {% endblock %}

@@ -1,6 +1,30 @@
-{% extends from "base.html" %}
+{% extends "base.html" %}
 
-{% block content%}
-    
+{% block content %}
+    <h2>Add a Blog Entry</h2>
+    <hr/>
+    {% with title_msgs = get_flashed_messages(category_filter=['title_error']) %}
+    {% with content_msgs = get_flashed_messages(category_filter=['content_error']) %}
+
+    <form method="POST" action="/newpost">
+        <p><label>Enter title for your blog:<br>
+        <input type = "text" name="title" value="{{title}}"/>
+        <br/>
+        <label class="error">{{ title_msgs[0] }}</label> </label></p>
+
+        <p><input type="hidden" name ="post-id" value={{post_id}} /></p>
+        <br/> <br/>
+
+        <p><label>Your New Blog Content:<br>
+        <textarea name="content" rows="10" cols="100" value={{content}}></textarea></label>
+        <br/>
+        <label class="error">{{ content_msgs[0] }}</label></p>
+        <br><br>
+
+        <p><input type="submit" value="Add Entry" /></p>
+    </form>
+
+    {% endwith %}
+    {% endwith %}
 
 {% endblock %}
