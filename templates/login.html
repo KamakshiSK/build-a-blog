@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>Log in to Build A Blog!</h1>
+<p>If you don't have an account, you may <a href="/register"><i>register</i></a> for one.</p>
+<form action="/login" method="post">
+    {% with email_messages = get_flashed_messages(category_filter =['error_email']) %}
+    {% with password_messages = get_flashed_messages(category_filter=['error_password'])%}
+    <table align="center">
+        <tr>
+            <td><label for="email">Email</label></td>
+            <td>
+                <input name="email" type="email" value="{{ email }}">
+            </td>
+            <td><label class='error'>{{email_messages[0]}}</label></td>
+        </tr>
+        <tr>
+            <td><label for="password">Password</label></td>
+            <td>
+                <input name="password" type="password">
+            </td>
+            <td><label class='error'>{{password_messages[0]}}</label></td>
+
+        </tr>
+        <tr>
+            <td rowspan="2"><input type="submit" value="Login"></td>
+        </tr>
+    </table>
+    {% endwith %}
+    {% endwith %}
+
+</form>
+
+{% endblock %}

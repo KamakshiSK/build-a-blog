@@ -7,18 +7,42 @@
                 color:red;
                 font-style: oblique;
             }
+            .success{
+                color:green;
+                font-style: oblique;
+            }
         </style>
     </head>
 
     <body>
+        <div style='float: right'>
+            {% if 'email' in session %}
+                <em>{{ session['email'] }} </em>
+                <a href="/logout">Logout</a>
+            {% else %}
+                <a href="login">login</a> | <a href="register">register</a>
+            {% endif %}
+        </div>
+        {% block nav %}
+        {% endblock %}
+
         <nav>
             <a href="/blog">Main Blog Page</a> <b>|</b>
             <a href="/newpost">Add New Blog Entry </a> <b>|</b>
         </nav>
 
 
+
         {% block content%}
 
         {% endblock %}
     </body>
+
+    <footer>
+        {% with messages=get_flashed_messages(category_filter=['success']) %}
+
+        <p class='success' align="right"> {{messages[0]}} </p>
+
+        {% endwith %}
+    </footer>
 </html>
