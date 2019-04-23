@@ -153,9 +153,8 @@ def newpost():
         db.session.commit()
 
         flash("Blog entry successful.", category='success')
-        post = Blog.query.filter_by(owner=this_owner).order_by(Blog.timestamp.desc()).first()
 
-        return render_template("blog.html", title = "Blog ", posts=[post])
+        return redirect("/blog?id={}".format(blog.post_id))
 
     else:
         return render_template("newpost.html")  
