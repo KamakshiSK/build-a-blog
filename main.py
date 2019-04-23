@@ -142,18 +142,21 @@ def newpost():
 
         if not post_title:
             flash("Please enter post title.", category="title_error")
+            return render_template("newpost.html", title = post_title, content = post_content)
 
         if not post_content:
             flash("Please enter contents for the post.", category="content_error")
-            return render_template("newpost.html", title = post_title, content = post_content)
-        
+            return render_template("newpost.html", title = post_title)
+            
         blog = Blog(post_title, post_content, this_owner)
         db.session.add(blog)
         db.session.commit()
 
         flash("Blog entry successful.", category='success')
-        all_posts = Blog.query.filter_by(owner=this_owner).all()
-        return render_template("/blog.html", posts=all_posts)
+        post = Blog.query.filter_by(owner=this_owner).order_by(Blog.timestamp.desc()).first()
+
+        return render_template("blog.html", title = "Blog ", posts=[post])
+
     else:
         return render_template("newpost.html")  
 
